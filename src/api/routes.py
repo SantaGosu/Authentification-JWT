@@ -15,7 +15,7 @@ api = Blueprint('api', __name__)
 
 @api.route("/token", methods=["POST"])
 def create_token():
-    username = request.json.get("email", None)
+    email = request.json.get("email", None)
     password = request.json.get("password", None)
     if email != "test" or password != "test":
         return jsonify({"msg": "Bad email or password"}), 401
@@ -23,11 +23,13 @@ def create_token():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
+@api.route('/hello', methods=[ 'GET'])
+@jwt_required()
+def get_hello():
 
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
+    email = get_jwt_identity()
+    dictionary ={
+        "msg": "Hello World" + email
     }
 
-    return jsonify(response_body), 200
+    return jsonify(dictionary)
