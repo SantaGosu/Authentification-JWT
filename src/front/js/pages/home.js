@@ -12,15 +12,10 @@ export const Home = () => {
 
   return (
     <div className="text-center mt-5">
-      <h1>Hello Rigo!!</h1>
-     
+      <h1>Welcome Home!</h1>
+
       <div className="alert alert-info">{store.message}</div>
-      <p>
-        This boilerplate comes with lots of documentation:{" "}
-        <a href="https://github.com/4GeeksAcademy/react-flask-hello/tree/95e0540bd1422249c3004f149825285118594325/docs">
-          Read documentation
-        </a>
-      </p>
+      <p>This is the main page of the website</p>
     </div>
   );
 };

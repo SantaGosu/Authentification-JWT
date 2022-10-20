@@ -17,6 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
     },
     actions: {
+      setStore: () => setStore(),
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
         getActions().changeColor(0, "green");
@@ -63,6 +64,35 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.err("there has been an error");
         }
       },
+      signup: async (email, password) => {
+				const ops = {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						"email": email,
+						"password": password
+					})
+
+				}
+
+				try {
+				const resp = await fetch('https://3001-santagosu-authentificat-1u0010ihh8b.ws-us71.gitpod.io/api/signup', {ops})
+				if (resp.status !== 200) {
+				alert("There has been an error")
+				return false
+				}
+				const data = await resp.json();		
+				sessionStorage.setItem("token", data.access_token)
+				setStore({token: data.access_token})
+				actions.setStore({email: email})
+					
+				}
+				catch (err) {
+					console.error(err);
+				}
+			},
 
       getMessage: async () => {
         const store = getStore();

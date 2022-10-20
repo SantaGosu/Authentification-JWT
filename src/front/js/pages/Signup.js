@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const { store, actions } = useContext(Context);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
   const onClick = () => {
     actions.signup(email, password);
   };
