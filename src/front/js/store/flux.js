@@ -61,7 +61,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ token: data.access_token });
           return true;
         } catch (err) {
-          console.err("there has been an error");
+          console.log("there has been an error");
         }
       },
       signup: async (email, password) => {
